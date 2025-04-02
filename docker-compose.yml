@@ -1,0 +1,44 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: myscretpassword
+      POSTGRES_DB: thales_db
+    ports:
+      - "5431:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d thales_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./thalesapi
+    container_name: thales-api
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: myscretpassword
+      DB_NAME: thales_db
+      UI_URL: http://localhost:4200
+    ports:
+      - "8990:8990"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    container_name: thales-ui
+    build: ./thalesui
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

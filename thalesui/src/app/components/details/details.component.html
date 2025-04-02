@@ -1,0 +1,31 @@
+<div *ngIf="product; else loading">
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+  <div class="action-buttons">
+    <button class="edit-btn" (click)="editProduct()">✏️ Edit</button>
+    <button class="delete-btn" (click)="deleteProduct()">🗑️ Delete</button>
+  </div>
+
+  <h2 class="product-title">{{ product.name }}</h2>
+
+  <div class="product-header">
+    <img [src]="product.imageURL" alt="{{ product.name }}" class="product-image"/>
+
+    <div class="product-meta">
+      <div><strong>Model No:</strong> {{ product.modelNo }}</div>
+      <div><strong>Year:</strong> {{ product.year }}</div>
+      <div><strong>Theme Type:</strong> {{ product.themeType }}</div>
+      <div><strong>Category:</strong> {{ product.categoryType }}</div>
+      <div><strong>Price:</strong>${{ formatNumberWithCommas(product.price) }}</div>
+    </div>
+  </div>
+
+  <div class="product-description">
+    <h4>Description</h4>
+    <p>{{ product.description }}</p>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Loading product details...</p>
+</ng-template>

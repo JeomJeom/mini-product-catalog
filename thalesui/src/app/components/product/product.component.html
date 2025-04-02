@@ -1,0 +1,65 @@
+<div class="layout">
+  <aside class="filter">
+    <section class="searchbar">
+      <form>
+        <input type="text" placeholder="Search by name..." #filter (keyup.enter)="onSearchKeyword(filter.value)">
+      </form>
+    </section>
+    <span class="selectText">Filter By</span>
+    <section>
+      <!-- Filter Dropdown -->
+      <span class="selectText">Theme:</span>
+      <p-select
+        id="themeFilter"
+        *ngIf="themeTypeOptions.length > 1"
+        [options]="themeTypeOptions"
+        optionLabel="label"
+        optionValue="value"
+        [(ngModel)]="themeTypeValue"
+        (onChange)="onThemeTypeChange()"
+        placeholder="Select a theme type">
+      </p-select>
+    </section>
+  </aside>
+
+  <section class="products">
+    <div class="box">
+      <span class="section-title">Products</span>
+      <div class="flex-grow"></div>
+      <button class="primary" type="button" [routerLink]="['/create']">Create Product</button>
+    </div>
+
+    <div class="paginator">
+      <span class="selectText">Items per page: </span>
+      <p-select [options]="options" optionLabel="label" optionValue="value" [(ngModel)]="productFilter.pageSize"
+                (ngModelChange)="first = 0" (onChange)="onPageSizeChange($event)"/>
+      <p-paginator *ngIf="totalItems > 0" [first]="first" [rows]="productFilter.pageSize" [totalRecords]="totalItems"
+                   (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+                   currentPageReportTemplate="{first} - {last} of {totalRecords}" [showPageLinks]="false"
+                   [showFirstLastIcon]="false"></p-paginator>
+
+      <div class="flex-grow"></div>
+
+      <span class="selectText">Sort by: </span>
+      <p-select
+        id="sortBy"
+        [options]="sortOptions"
+        optionLabel="label"
+        optionValue="value"
+        [(ngModel)]="selectedSort"
+        (onChange)="onSortBy()"
+        placeholder="Sort by...">
+      </p-select>
+
+    </div>
+
+
+    <section class="results">
+      <app-product-list
+        *ngFor="let product of paginatedProducts"
+        [product]="product">
+      </app-product-list>
+    </section>
+  </section>
+
+</div>

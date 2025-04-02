@@ -1,0 +1,50 @@
+<button class="back-btn" (click)="goBack()">← Back</button>
+<h2>{{ mode === 'edit' ? 'Edit Product' : 'Create Product' }}</h2>
+<form #form="ngForm" (ngSubmit)="submitForm(form)">
+  <div class="form-grid">
+    <label>Name:
+      <input type="text" pInputText name="name" [(ngModel)]="product.name" required/>
+    </label>
+
+    <label>Model No:
+      <input type="text" pInputText name="modelNo" [(ngModel)]="product.modelNo" required/>
+    </label>
+
+    <label>Year:
+      <input pInputText type="number" name="year" [(ngModel)]="product.year" required/>
+    </label>
+
+    <label>
+      Theme Type:
+      <p-select *ngIf="themeTypeOptions.length > 1" name="themeType" [(ngModel)]="product.themeType"
+                  [options]="themeTypeOptions"
+                  optionLabel="label"
+                  optionValue="label" required>
+      </p-select>
+    </label>
+
+
+    <label>Category Type:
+      <input type="text" pInputText name="categoryType" [(ngModel)]="product.categoryType" required/>
+    </label>
+
+    <!--TODO: upload feature -->
+    <label>Image URL:
+      <input type="text" pInputText name="imageURL" [(ngModel)]="product.imageURL"/>
+    </label>
+
+    <label>Price:
+      <input pInputText type="number" name="price" [(ngModel)]="product.price" required/>
+    </label>
+
+  </div>
+
+  <label style="margin-top: 16px">Description:
+    <textarea rows="5" cols="30" pTextarea name="description" [(ngModel)]="product.description"></textarea>
+  </label>
+
+  <div class="submitBtn">
+    <button class="primary" type="submit"> {{ mode === 'edit' ? 'Update' : 'Create' }}</button>
+  </div>
+
+</form>

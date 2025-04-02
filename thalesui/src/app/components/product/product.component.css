@@ -1,0 +1,125 @@
+section {
+  display: flex;
+  align-items: center; /* vertically align items */
+  gap: 1rem;         /* optional space between items */
+}
+
+.results {
+  display: grid;
+  column-gap: 14px;
+  row-gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(375px, 375px));
+  margin-top: 30px;
+  justify-content: space-around;
+}
+
+input[type="text"] {
+  border: solid 1px #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  /*margin-right: 4px;*/
+  /*display: inline-block;*/
+  width: 100%;
+}
+
+button {
+  padding: 10px;
+  border: solid 1px var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .results {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  input[type="text"] {
+      width: 70%;
+  }
+}
+
+@media (max-width: 499px) {
+  .results {
+      grid-template-columns: 1fr;
+  }
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.pager button {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.pager button:hover:not(:disabled) {
+  background-color: #f0f0f0;
+}
+
+.pager button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pager button.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.filter {
+  flex: 0 0 250px; /* Fixed width for the filter panel */
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+}
+
+#themeFilter {
+  width: 100%;
+}
+
+.products {
+  display: block;
+  flex: 1; /* Takes up the remaining space */
+  padding: 1rem;
+}
+
+.box {
+  display: flex;
+}
+
+.paginator {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.selectText {
+  color: grey;
+  margin-left: 4px;
+  margin-right: 8px;
+}
+
+.searchbar {
+  margin-bottom: 12px;
+}

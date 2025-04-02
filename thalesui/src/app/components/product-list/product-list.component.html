@@ -1,0 +1,9 @@
+<section class="listing">
+  <img class="listing-photo" [ngSrc]="product.imageURL" [width]="250"
+       [height]="250" alt="Exterior photo of {{product.name}}">
+  <h3 class="listing-heading">{{ product.name }}</h3>
+  <p class="listing-description">{{ product.themeType }}</p>
+  <p class="listing-description">{{ product.description }}</p>
+  <p class="listing-price">${{ formatNumberWithCommas(product.price) }}</p>
+  <a [routerLink]="['/details', product.id]">View More</a>
+</section>
